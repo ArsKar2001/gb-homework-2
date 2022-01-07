@@ -1,36 +1,28 @@
 package ru.gb.homework;
 
-import java.util.*;
-
 public class App {
 
     public static void main(String[] args) {
-        String[] strings = {
-                "b",
-                "C",
-                "A",
-                "b",
-                "V",
-                "C",
-                "A",
-                "C"
+        Note[] notes = {
+                new Note("Карманов", "454545664645"),
+                new Note("Карманов", "787878787"),
+                new Note("Коркунов", "557676676"),
+                new Note("Иванов", "54545"),
+                new Note("Коркунов", "7987964565"),
         };
 
-        List<String> list = Arrays.asList(strings);
+        Phonebook phonebook = new Phonebook(notes);
 
-        System.out.println(list);
+        System.out.println(phonebook);
 
-        Set<String> set = new HashSet<>(list);
+        phonebook.add(new Note("Тестов", "12345678"));
 
-        System.out.println(set);
+        System.out.println(phonebook);
 
-        for (String s1 : set) {
-            int count = 0;
-            for (String s2 : list) {
-                if (s1.equals(s2))
-                    count++;
-            }
-            System.out.printf("\"%s\" встречается раз: %d\n", s1, count);
-        }
+
+        String search = "Карманов";
+        System.out.printf("Поиск по фамилиии \"%s\":\n", search);
+        for (String s : phonebook.get(search))
+            System.out.println(s);
     }
 }
