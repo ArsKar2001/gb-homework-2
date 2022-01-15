@@ -2,36 +2,27 @@ package ru.gb.homework;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
  * Class Phonebook, which stores a list of names and telephone numbers.
  */
 public class Phonebook {
-    private final List<Note> notes;
-
-    public Phonebook(List<Note> notes) {
-        this.notes = notes;
-    }
-
-    public Phonebook() {
-        this.notes = new ArrayList<>();
-    }
+    private final LinkedList<Note> notes;
 
     public Phonebook(Note[] notes) {
-        this.notes = new ArrayList<>(Arrays.asList(notes));
+        this.notes = new LinkedList<>(Arrays.asList(notes));
     }
 
     public void add(Note note) {
-        notes.add(note);
+        notes.addLast(note);
     }
 
-    public List<String> get(String s) {
-        List<String> list = new ArrayList<>();
-        for (Note note : notes)
-            if (s.equalsIgnoreCase(note.getFirstName()))
-                list.add(note.getPhoneNumber());
-        return list;
+    public List<Note> get(String s) {
+        List<Note> nl = notes;
+        nl.removeIf(n -> !n.getFirstName().equalsIgnoreCase(s));
+        return nl;
     }
 
     @Override
